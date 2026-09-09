@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<!--
+  Search this file for "TK" before publishing. Every TK is a hole.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rob Nelson</title>
+  <meta name="description" content="Rob Nelson — U.S. Army veteran and Berkeley Haas MBA candidate. [TK: one line]">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+  :root {
+    --berkeley-blue: #003262;
+    --california-gold: #FDB515;
+    --paper: #FAFAF8;
+    --ink: #2B2B2B;
+    --muted: #6B6B66;
+    --rule: #DEDDD6;
+    --measure: 36rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 46rem; margin-inline: auto; padding: 0 1.5rem; }
+
+  a { color: var(--berkeley-blue); text-decoration-color: var(--california-gold); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--berkeley-blue); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- TOP BAR ----------
+     position:sticky + top:0 pins this to the top of the window once you
+     scroll past it. Unlike position:fixed it still occupies space in the
+     layout, so nothing jumps when it sticks. */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;              /* stacks above page content */
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* pushes children to opposite ends */
+    min-height: 3.5rem;
+  }
+  .wordmark {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.05rem;
+    color: var(--berkeley-blue);
+    text-decoration: none;
+  }
+
+  /* The nav is commented out in the HTML below. These styles sit ready.
+     When you add a second page, uncomment the block and it works. */
+  nav ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; font-size: 0.95rem; }
+  nav a { text-decoration: none; }
+  nav a[aria-current="page"] { border-bottom: 2px solid var(--california-gold); }
+
+  /* ---------- HERO ---------- */
+  header.hero { padding: 3.5rem 0 1rem; }
+
+  .headshot {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;   /* crops to fill the circle instead of squashing */
+    display: block;
+    margin-bottom: 1.75rem;
+    border: 3px solid var(--california-gold);
+  }
+
+  /* Fallback shown only while you have no photo file. Delete it once the
+     real <img> is in. */
+  .headshot-placeholder {
+    width: 150px; height: 150px; border-radius: 50%;
+    background: #EDEDE7; border: 2px dashed var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 0.75rem; color: var(--muted);
+    margin-bottom: 1.75rem; padding: 1rem;
+  }
+
+  h1 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--berkeley-blue);
+    margin: 0 0 1.75rem;
+  }
+  /* Colors the dividers in the headline gold without touching the words. */
+  h1 .pipe { color: var(--california-gold); font-weight: 400; padding: 0 0.15em; }
+
+  .bio p { max-width: var(--measure); margin: 0 0 1.35rem; }
+
+  /* ---------- RESUME BUTTON + LINKS ---------- */
+  .actions {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 1rem 1.75rem;
+    margin: 2rem 0 0;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--berkeley-blue);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .btn:hover { background: #00284F; }
+  .actions ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; padding: 0; font-size: 0.95rem; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 3.25rem 0; }
+  h2 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--berkeley-blue);
+    margin: 0 0 1.75rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  section p { max-width: var(--measure); }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .record { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--rule); }
+  .record > li { position: relative; padding: 0 0 2.25rem 1.75rem; }
+  .record > li:last-child { padding-bottom: 0; }
+  .record > li::before {
+    content: "";
+    position: absolute; left: -6px; top: 0.75rem;
+    width: 10px; height: 10px;
+    background: var(--california-gold);
+    border-radius: 50%;
+  }
+  .role { font-weight: 600; color: var(--berkeley-blue); display: block; }
+  .org  { display: block; }
+  .dates { display: block; color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+  .scope { margin: 0.5rem 0 0; max-width: var(--measure); }
+
+  /* ---------- EDUCATION ---------- */
+  .edu { list-style: none; padding: 0; margin: 0; }
+  .edu li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+  .edu li:last-child { border-bottom: none; }
+
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 3px solid var(--berkeley-blue); padding: 2rem 0 4rem; font-size: 0.9rem; color: var(--muted); }
+  footer p { margin: 0.3rem 0; }
+
+  @media (max-width: 620px) {
+    body { font-size: 16px; }
+    header.hero { padding-top: 2.5rem; }
+    .headshot, .headshot-placeholder { width: 120px; height: 120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <a class="wordmark" href="index.html">Rob Nelson</a>
+
+      <!-- NAV: parked until you build the other pages. To turn it on,
+           delete this comment-opening line and the closing line below.
+      <nav>
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+        </ul>
+      </nav>
+      -->
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+
+      <!-- HEADSHOT.
+           When you have a photo, delete the placeholder div below and
+           uncomment this line. Put the file at assets/headshot.jpg.
+           alt text is read aloud by screen readers and shows if the image
+           fails to load. Describe the person, don't write "photo of."
+      <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
+      -->
+      <div class="headshot-placeholder">[TK]<br>headshot</div>
+
+      <!-- Three-part identity line, same device as the reference site.
+           TK: pick your three. Candidates from what you've told me:
+             Army Veteran | MBA Candidate | Dad
+             Army Officer | Berkeley MBA | Engineer
+           The <span class="pipe"> only exists to color the divider gold. -->
+      <h1>
+        [TK]<span class="pipe">|</span>[TK]<span class="pipe">|</span>[TK]
+      </h1>
+
+      <div class="bio">
+        <p>
+          [TK — PARAGRAPH 1. Who you are now and the through-line of your
+          career. The reference site opens with "I'm an MBA candidate at X
+          and a U.S. Army veteran who built my career in ___."]
+        </p>
+        <p>
+          [TK — PARAGRAPH 2. The transition and what you're aiming at.
+          This is where the specific target roles go.]
+        </p>
+        <p>
+          [TK — PARAGRAPH 3. The personal one. Natural home for the family
+          mention without specifics, plus interests.]
+        </p>
+      </div>
+
+      <div class="actions">
+        <!-- Filename must match your PDF exactly. GitHub Pages is
+             case-sensitive: Resume.pdf and resume.pdf are different files. -->
+        <a class="btn" href="assets/Rob-Nelson-Resume.pdf">Resume</a>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a></li>
+          <li><a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <section id="experience">
+      <div class="wrap">
+        <h2>Experience</h2>
+        <ul class="record">
+
+          <li>
+            <span class="role">Company Commander</span>
+            <span class="org">A Company, 3rd Brigade Engineer Battalion, 3rd ABCT, 1st Cavalry Division</span>
+            <span class="dates">[TK: start – end]</span>
+            <p class="scope">[TK: one or two sentences. You've mentioned a 100-person organization and $40M in assets — tell me what you did with it.]</p>
+          </li>
+
+          <li>
+            <span class="role">Battalion Operations Officer</span>
+            <span class="org">[TK: unit]</span>
+            <span class="dates">[TK: start – end]</span>
+            <p class="scope">[TK: 500-person organization — what was the job?]</p>
+          </li>
+
+          <li>
+            <span class="role">Company Executive Officer</span>
+            <span class="org">[TK: unit]</span>
+            <span class="dates">[TK: start – end]</span>
+            <p class="scope">[TK]</p>
+          </li>
+
+          <li>
+            <span class="role">Engineer Platoon Leader</span>
+            <span class="org">[TK: unit — 2-2 SBCT at Joint Base Lewis-McChord?]</span>
+            <span class="dates">[TK: start – end]</span>
+            <p class="scope">[TK]</p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <h2>Education</h2>
+        <ul class="edu">
+          <li>
+            <span class="role">MBA, Evening &amp; Weekend</span>
+            <span class="org">Berkeley Haas School of Business</span>
+            <span class="dates">Expected 2028</span>
+          </li>
+          <li>
+            <span class="role">M.S. Geological Engineering</span>
+            <span class="org">Missouri University of Science and Technology</span>
+            <span class="dates">2023</span>
+          </li>
+          <li>
+            <span class="role">B.S. Psychology, business minor</span>
+            <span class="org">Texas A&amp;M University</span>
+            <span class="dates">2016</span>
+          </li>
+          <li>
+            <span class="role">Project Management Professional (PMP)</span>
+            <span class="org">Project Management Institute</span>
+            <span class="dates">[TK: year earned]</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a></p>
+      <p>Harker Heights, Texas</p>
+    </div>
+  </footer>
+
+</body>
+</html>

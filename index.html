@@ -6,6 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Keeps the page out of Google results while it is unfinished.
+       DELETE THIS LINE when you are ready to be found. -->
   <meta name="robots" content="noindex">
   <title>Rob Nelson</title>
   <meta name="description" content="Rob Nelson — U.S. Army veteran and Berkeley Haas MBA candidate. [TK: one line]">
@@ -153,10 +155,22 @@
     background: var(--california-gold);
     border-radius: 50%;
   }
+  /* Training entries: hollow dot instead of filled gold, so a reader can
+     tell at a glance which dots are jobs and which are schools. Same
+     ::before element, just recolored and given a border. */
+  .record > li.training::before {
+    background: var(--paper);
+    border: 2px solid var(--rule);
+  }
+  .record > li.training .role { color: var(--muted); font-weight: 500; }
+
   .role { font-weight: 600; color: var(--berkeley-blue); display: block; }
   .org  { display: block; }
   .dates { display: block; color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
-  .scope { margin: 0.5rem 0 0; max-width: var(--measure); }
+  .scope { margin: 0.5rem 0 0; max-width: var(--measure); padding-left: 1.1rem; }
+  .scope li { margin-bottom: 0.4rem; }
+  /* ::marker targets just the bullet glyph, not the text next to it. */
+  .scope li::marker { color: var(--california-gold); }
 
   /* ---------- EDUCATION ---------- */
   .edu { list-style: none; padding: 0; margin: 0; }
@@ -200,14 +214,9 @@
   <header class="hero">
     <div class="wrap">
 
-      <!-- HEADSHOT.
-           When you have a photo, delete the placeholder div below and
-           uncomment this line. Put the file at assets/headshot.jpg.
-           alt text is read aloud by screen readers and shows if the image
-           fails to load. Describe the person, don't write "photo of."
+      <!-- alt text is read by screen readers and shows if the image fails
+           to load. Describe the person; don't write "photo of." -->
       <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
-      -->
-      <div class="headshot-placeholder">[TK]<br>headshot</div>
 
       <!-- Three-part identity line, same device as the reference site.
            TK: pick your three. Candidates from what you've told me:
@@ -237,7 +246,7 @@
       <div class="actions">
         <!-- Filename must match your PDF exactly. GitHub Pages is
              case-sensitive: Resume.pdf and resume.pdf are different files. -->
-        <a class="btn" href="assets/Rob-Nelson-Resume.pdf">Resume</a>
+        <a class="btn" href="assets/Rob%20Nelson%20Resume.pdf">Resume</a>
         <ul>
           <li><a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a></li>
           <li><a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a></li>
@@ -249,37 +258,82 @@
 
   <main>
 
+    <section id="current">
+      <div class="wrap">
+        <h2>Current Work</h2>
+        <ul class="record">
+          <li>
+            <span class="role">Independent Product Development</span>
+            <span class="dates">Jan 2026 &ndash; Present</span>
+            <ul class="scope">
+              <li>Designed and built a launch-ready AI application MVP as sole developer, covering product definition, model integration, front-end implementation, and deployment.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <section id="experience">
       <div class="wrap">
         <h2>Experience</h2>
         <ul class="record">
 
           <li>
-            <span class="role">Company Commander</span>
+            <span class="role">Engineer Company Commander</span>
             <span class="org">A Company, 3rd Brigade Engineer Battalion, 3rd ABCT, 1st Cavalry Division</span>
-            <span class="dates">[TK: start – end]</span>
-            <p class="scope">[TK: one or two sentences. You've mentioned a 100-person organization and $40M in assets — tell me what you did with it.]</p>
+            <span class="dates">Sep 2024 &ndash; Jan 2026</span>
+            <ul class="scope">
+              <li>Directed operations, asset accountability, and personnel management for a 100-person organization, often distributed across multiple states, with $40M in equipment and operating resources; rated Top 10% of officers.</li>
+              <li>Planned and executed large-scale deployments requiring cost forecasting, vendor coordination, transportation contracting, and strict compliance with financial and regulatory controls.</li>
+            </ul>
           </li>
 
           <li>
-            <span class="role">Battalion Operations Officer</span>
-            <span class="org">[TK: unit]</span>
-            <span class="dates">[TK: start – end]</span>
-            <p class="scope">[TK: 500-person organization — what was the job?]</p>
+            <span class="role">Engineer Battalion Operations Officer</span>
+            <span class="org">3rd Engineer Battalion &mdash; Fort Hood, TX</span>
+            <span class="dates">May 2023 &ndash; Sep 2024</span>
+            <ul class="scope">
+              <li>Oversaw daily operations and resource allocation for a 500-person distributed organization, ensuring alignment between funding, operational priorities, and execution timelines.</li>
+              <li>Selected above peers for senior role; managed and mentored a 10-person leadership team responsible for planning, reporting, and resource tracking across six organizations of roughly 100 personnel each.</li>
+            </ul>
+          </li>
+
+          <li class="training">
+            <span class="role">Engineer Captain&rsquo;s Career Course</span>
+            <span class="org">Academic Superior Graduate</span>
+            <span class="dates">May 2022 &ndash; Oct 2022</span>
           </li>
 
           <li>
             <span class="role">Company Executive Officer</span>
-            <span class="org">[TK: unit]</span>
-            <span class="dates">[TK: start – end]</span>
-            <p class="scope">[TK]</p>
+            <span class="org">Headquarters, 2-2 Stryker Brigade Combat Team &mdash; Joint Base Lewis-McChord, WA</span>
+            <span class="dates">Feb 2020 &ndash; Mar 2022</span>
+            <ul class="scope">
+              <li>Managed logistics and equipment accountability for $40M in assets supporting 179 personnel.</li>
+              <li>Generated $370K in cost savings by improving procurement discipline and inventory controls.</li>
+              <li>Led reconciliation and transfer of $3.65M in property with zero discrepancies or losses.</li>
+            </ul>
           </li>
 
           <li>
             <span class="role">Engineer Platoon Leader</span>
-            <span class="org">[TK: unit — 2-2 SBCT at Joint Base Lewis-McChord?]</span>
-            <span class="dates">[TK: start – end]</span>
-            <p class="scope">[TK]</p>
+            <span class="org">14th Engineer Battalion &mdash; Joint Base Lewis-McChord, WA</span>
+            <span class="dates">Apr 2019 &ndash; Feb 2020</span>
+            <ul class="scope">
+              <li>Supervised a 31-person team responsible for $42.6M in equipment and execution of multiple engineering projects.</li>
+            </ul>
+          </li>
+
+          <li class="training">
+            <span class="role">Engineer Basic Officer Leader Course</span>
+            <span class="org">Honor Graduate</span>
+            <span class="dates">May 2018 &ndash; Oct 2018</span>
+          </li>
+
+          <li class="training">
+            <span class="role">Officer Candidate School</span>
+            <span class="org">Honor Graduate</span>
+            <span class="dates">Jan 2018 &ndash; Apr 2018</span>
           </li>
 
         </ul>
@@ -308,7 +362,7 @@
           <li>
             <span class="role">Project Management Professional (PMP)</span>
             <span class="org">Project Management Institute</span>
-            <span class="dates">[TK: year earned]</span>
+            <span class="dates">2023</span>
           </li>
         </ul>
       </div>

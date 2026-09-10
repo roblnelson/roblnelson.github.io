@@ -99,24 +99,45 @@
   }
 
   h1 {
+    /* To move the headline back to the left, delete .hero-top
+       text-align:center above and add text-align:left here. */
     font-family: "IBM Plex Serif", Georgia, serif;
     font-weight: 500;
-    font-size: clamp(1.9rem, 5.5vw, 2.75rem);
-    line-height: 1.15;
+    /* Sized to fit "Army Veteran | MBA Candidate | Engineer" on one line
+       on desktop. If you lengthen the headline it will wrap again —
+       lower the 2.15rem until it fits, or shorten the words. */
+    font-size: clamp(1.5rem, 3.6vw, 2.15rem);
+    line-height: 1.2;
     letter-spacing: -0.015em;
+    /* When it DOES have to wrap (phones), this splits the lines evenly
+       instead of leaving one word stranded on line two. */
+    text-wrap: balance;
     color: var(--berkeley-blue);
     margin: 0 0 1.75rem;
   }
   /* Colors the dividers in the headline gold without touching the words. */
-  h1 .pipe { color: var(--california-gold); font-weight: 400; padding: 0 0.15em; }
+  h1 .pipe { color: var(--california-gold); font-weight: 400; padding: 0 0.2em; }
+  /* Keeps each phrase intact — a break can only happen at a pipe,
+     never in the middle of "MBA Candidate". */
+  h1 .part { white-space: nowrap; }
 
+  /* Prose stays left-aligned. Centered body text is hard to read —
+     the eye loses the start of each line. */
+  .bio { text-align: left; }
   .bio p { max-width: var(--measure); margin: 0 0 1.35rem; }
 
   /* ---------- RESUME BUTTON + LINKS ---------- */
+  /* text-align:center on the parent centers inline content (the h1 text).
+     margin-inline:auto is what centers a BLOCK element like the image —
+     text-align alone won't move it. Two different mechanisms. */
+  .hero-top { text-align: center; }
+  .hero-top .headshot { margin-inline: auto; }
+
   .actions {
     display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: center;   /* centers the row along the main axis */
     gap: 1rem 1.75rem;
-    margin: 2rem 0 0;
+    margin: 1.75rem 0 2.5rem;
   }
   .btn {
     display: inline-block;
@@ -172,6 +193,31 @@
   /* ::marker targets just the bullet glyph, not the text next to it. */
   .scope li::marker { color: var(--california-gold); }
 
+  /* ---------- PHOTOS ----------
+     max-width:100% is what keeps an image inside its container. Without
+     it, a 3000px photo renders at 3000px and blows out the layout.
+     height:auto preserves the aspect ratio as the width shrinks. */
+  figure { margin: 1.75rem 0; max-width: var(--measure); }
+  figure img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 3px;
+  }
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--california-gold);
+  }
+
+  /* Two or three photos side by side. On phones they stack, because
+     each one has a min-width and flex-wrap pushes overflow to a new row. */
+  .photo-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.75rem 0; }
+  .photo-row figure { flex: 1 1 200px; margin: 0; }
+
   /* ---------- EDUCATION ---------- */
   .edu { list-style: none; padding: 0; margin: 0; }
   .edu li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
@@ -214,50 +260,31 @@
   <header class="hero">
     <div class="wrap">
 
-      <!-- alt text is read by screen readers and shows if the image fails
-           to load. Describe the person; don't write "photo of." -->
-      <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
+      <!-- .hero-top wraps everything that should be centered: the photo,
+           the action row, and the headline. The bio below it is outside
+           this div, so it stays left-aligned. -->
+      <div class="hero-top">
 
-      <!-- Three-part identity line, same device as the reference site.
-           TK: pick your three. Candidates from what you've told me:
-             Army Veteran | MBA Candidate | Dad
-             Army Officer | Berkeley MBA | Engineer
-           The <span class="pipe"> only exists to color the divider gold. -->
-      <h1>
-        Veteran<span class="pipe">|</span>MBA<span class="pipe">|</span>Engineer
-      </h1>
+        <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
 
-      <div class="bio">
-        <p>
-          I'm a current Evening & Weekend MBA candidate at UC Berkeley, Haas School of Business, a U.S. Army Engineer veteran, 
-          and a Texas A&M alumni. I built my career as an engineer and a leader in a variety of operational roles and 
-          locations. Along the way, I’ve helped organizations make sense of large portfolios of assets and find practical ways to 
-          improve operations. What I carried forward from both the Army and my professional work is a focus on teamwork, 
-          clarity, and building systems that people can actually use.
-          
-        </p>
-        <p>
-          After ten years serving alongside outstanding people in the Army, I am ready to transition into my next career with
-          the same passion I applied as an Army leader. Looking ahead, I’m preparing for a career where I can bring my 
-          background in operations and leadership to industries that are on the cutting edge of energy, technology, 
-          and defense.
-        </p>
-        <p>
-          Outside of work, I’m a husband and father of two, which is the most important leadership role I’ll ever have. I read 
-          widely, from history and biographies to sci-fi, and I enjoy conversations that challenge me to think differently. This 
-          webpage is one way I try to share the bigger picture of who I am - not just a resume or a career path, but the 
-          full mix of experiences, interests, and commitments that shape how I approach life and work.
-        </p>
+        <!-- Order in the HTML is the order on screen, left to right:
+             LinkedIn, then the Resume button, then email. -->
+        <div class="actions">
+          <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a>
+          <a class="btn" href="assets/Rob%20Nelson%20Resume.pdf">Resume</a>
+          <a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a>
+        </div>
+
+        <h1>
+          <span class="part">Army Veteran</span><span class="pipe">|</span><span class="part">MBA Candidate</span><span class="pipe">|</span><span class="part">Engineer</span>
+        </h1>
+
       </div>
 
-      <div class="actions">
-        <!-- Filename must match your PDF exactly. GitHub Pages is
-             case-sensitive: Resume.pdf and resume.pdf are different files. -->
-        <a class="btn" href="assets/Rob%20Nelson%20Resume.pdf">Resume</a>
-        <ul>
-          <li><a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a></li>
-          <li><a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a></li>
-        </ul>
+      <div class="bio">
+        <p>I'm a current Evening &amp; Weekend MBA candidate at UC Berkeley, Haas School of Business, a U.S. Army Engineer veteran, and a Texas A&amp;M alumni. I built my career as an engineer and a leader in a variety of operational roles and locations. Along the way, I&rsquo;ve helped organizations make sense of large portfolios of assets and find practical ways to improve operations. What I carried forward from both the Army and my professional work is a focus on teamwork, clarity, and building systems that people can actually use.</p>
+        <p>After ten years serving alongside outstanding people in the Army, I am ready to transition into my next career with the same passion I applied as an Army leader. Looking ahead, I&rsquo;m preparing for a career where I can bring my background in operations and leadership to industries that are on the cutting edge of energy, technology, and defense.</p>
+        <p>Outside of work, I&rsquo;m a husband and father of two, which is the most important leadership role I&rsquo;ll ever have. I read widely, from history and biographies to sci-fi, and I enjoy conversations that challenge me to think differently. This webpage is one way I try to share the bigger picture of who I am &mdash; not just a resume or a career path, but the full mix of experiences, interests, and commitments that shape how I approach life and work.</p>
       </div>
 
     </div>

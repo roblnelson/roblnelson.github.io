@@ -39,7 +39,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 46rem; margin-inline: auto; padding: 0 1.5rem; }
+  .wrap { max-width: 64rem; margin-inline: auto; padding: 0 1.5rem; }
 
   a { color: var(--berkeley-blue); text-decoration-color: var(--california-gold); text-underline-offset: 3px; }
   a:hover { text-decoration-thickness: 2px; }
@@ -68,6 +68,8 @@
     color: var(--berkeley-blue);
     text-decoration: none;
   }
+  /* Smaller button variant for the top bar. Same .btn styles, tighter. */
+  .topbar .btn { padding: 0.45rem 1.1rem; font-size: 0.88rem; }
 
   /* The nav is commented out in the HTML below. These styles sit ready.
      When you add a second page, uncomment the block and it works. */
@@ -79,13 +81,12 @@
   header.hero { padding: 3.5rem 0 1rem; }
 
   .headshot {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;   /* crops to fill the circle instead of squashing */
+    width: 100%;
+    aspect-ratio: 1 / 1;     /* stays square as the column resizes */
+    border-radius: 6px;
+    object-fit: cover;       /* crops to fill instead of squashing */
     display: block;
-    margin-bottom: 1.75rem;
-    border: 3px solid var(--california-gold);
+    border-top: 4px solid var(--california-gold);
   }
 
   /* Fallback shown only while you have no photo file. Delete it once the
@@ -99,6 +100,7 @@
   }
 
   h1 {
+    margin-top: 0;
     /* To move the headline back to the left, delete .hero-top
        text-align:center above and add text-align:left here. */
     font-family: "IBM Plex Serif", Georgia, serif;
@@ -106,7 +108,7 @@
     /* Sized to fit "Army Veteran | MBA Candidate | Engineer" on one line
        on desktop. If you lengthen the headline it will wrap again —
        lower the 2.15rem until it fits, or shorten the words. */
-    font-size: clamp(1.5rem, 3.6vw, 2.15rem);
+    font-size: clamp(1.9rem, 4.4vw, 2.75rem);
     line-height: 1.2;
     letter-spacing: -0.015em;
     /* When it DOES have to wrap (phones), this splits the lines evenly
@@ -127,17 +129,19 @@
   .bio p { max-width: var(--measure); margin: 0 0 1.35rem; }
 
   /* ---------- RESUME BUTTON + LINKS ---------- */
-  /* text-align:center on the parent centers inline content (the h1 text).
-     margin-inline:auto is what centers a BLOCK element like the image —
-     text-align alone won't move it. Two different mechanisms. */
-  .hero-top { text-align: center; }
-  .hero-top .headshot { margin-inline: auto; }
+  /* Two columns: a fixed 280px photo, then 1fr meaning "all remaining
+     space" for the text. gap is the space between them. */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2.75rem;
+    align-items: start;
+  }
 
   .actions {
     display: flex; flex-wrap: wrap; align-items: center;
-    justify-content: center;   /* centers the row along the main axis */
     gap: 1rem 1.75rem;
-    margin: 1.75rem 0 2.5rem;
+    margin: 1.5rem 0 0;
   }
   .btn {
     display: inline-block;
@@ -227,6 +231,13 @@
   footer { border-top: 3px solid var(--berkeley-blue); padding: 2rem 0 4rem; font-size: 0.9rem; color: var(--muted); }
   footer p { margin: 0.3rem 0; }
 
+  /* Below 760px the two columns collapse to one. 1fr alone means a single
+     full-width column, so photo and text stack. */
+  @media (max-width: 760px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    .headshot { max-width: 220px; }
+  }
+
   @media (max-width: 620px) {
     body { font-size: 16px; }
     header.hero { padding-top: 2.5rem; }
@@ -243,50 +254,45 @@
 
   <div class="topbar">
     <div class="wrap">
+      <!-- Left slot. Deliberately just type, no logo mark. -->
       <a class="wordmark" href="index.html">Rob Nelson</a>
 
-      <!-- NAV: parked until you build the other pages. To turn it on,
-           delete this comment-opening line and the closing line below.
-      <nav>
-        <ul>
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-        </ul>
-      </nav>
-      -->
+      <!-- Right slot. When you add pages, put the nav <ul> here, to the
+           LEFT of the button, inside this same div. -->
+      <div class="actions" style="margin:0">
+        <a class="btn" href="assets/Rob%20Nelson%20Resume.pdf">Resume</a>
+      </div>
     </div>
   </div>
 
   <header class="hero">
     <div class="wrap">
+      <div class="hero-grid">
 
-      <!-- .hero-top wraps everything that should be centered: the photo,
-           the action row, and the headline. The bio below it is outside
-           this div, so it stays left-aligned. -->
-      <div class="hero-top">
-
+        <!-- Column 1: the photo. -->
         <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
 
-        <!-- Order in the HTML is the order on screen, left to right:
-             LinkedIn, then the Resume button, then email. -->
-        <div class="actions">
-          <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a>
-          <a class="btn" href="assets/Rob%20Nelson%20Resume.pdf">Resume</a>
-          <a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a>
+        <!-- Column 2: headline, paragraphs, contact links. -->
+        <div>
+          <h1>
+            <span class="part">Veteran</span><span class="pipe">|</span><span class="part">MBA</span><span class="pipe">|</span><span class="part">Engineer</span>
+          </h1>
+
+          <div class="bio">
+        <p>I'm a current Evening &amp; Weekend MBA candidate at UC Berkeley, Haas School of Business, a U.S. Army Engineer veteran, and a Texas A&amp;M alumni. I built my career as an engineer and a leader in a variety of operational roles and locations. Along the way, I&rsquo;ve helped organizations make sense of large portfolios of assets and find practical ways to improve operations. What I carried forward from both the Army and my professional work is a focus on teamwork, clarity, and building systems that people can actually use.</p>
+
+        <p>After ten years serving alongside outstanding people in the Army, I am ready to transition into my next career with the same passion I applied as an Army leader. Looking ahead, I&rsquo;m preparing for a career where I can bring my background in operations and leadership to industries that are on the cutting edge of energy, technology, and defense.</p>
+
+        <p>Outside of work, I&rsquo;m a husband and father of two, which is the most important leadership role I&rsquo;ll ever have. I read widely, from history and biographies to sci-fi, and I enjoy conversations that challenge me to think differently. This webpage is one way I try to share the bigger picture of who I am &mdash; not just a resume or a career path, but the full mix of experiences, interests, and commitments that shape how I approach life and work.</p>
+          </div>
+
+          <div class="actions">
+            <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a>
+            <a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a>
+          </div>
         </div>
 
-        <h1>
-          <span class="part">Army Veteran</span><span class="pipe">|</span><span class="part">MBA Candidate</span><span class="pipe">|</span><span class="part">Engineer</span>
-        </h1>
-
       </div>
-
-      <div class="bio">
-<p>I'm a current Evening &amp; Weekend MBA candidate at UC Berkeley, Haas School of Business, a U.S. Army Engineer veteran, and a Texas A&amp;M alumni. I built my career as an engineer and a leader in a variety of operational roles and locations. Along the way, I&rsquo;ve helped organizations make sense of large portfolios of assets and find practical ways to improve operations. What I carried forward from both the Army and my professional work is a focus on teamwork, clarity, and building systems that people can actually use.</p>
-<p>After ten years serving alongside outstanding people in the Army, I am ready to transition into my next career with the same passion I applied as an Army leader. Looking ahead, I&rsquo;m preparing for a career where I can bring my background in operations and leadership to industries that are on the cutting edge of energy, technology, and defense.</p>
-<p>Outside of work, I&rsquo;m a husband and father of two, which is the most important leadership role I&rsquo;ll ever have. I read widely, from history and biographies to sci-fi, and I enjoy conversations that challenge me to think differently. This webpage is one way I try to share the bigger picture of who I am &mdash; not just a resume or a career path, but the full mix of experiences, interests, and commitments that shape how I approach life and work.</p>
-      </div>
-
     </div>
   </header>
 

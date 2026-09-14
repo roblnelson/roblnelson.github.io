@@ -155,15 +155,20 @@
   .photo-links {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
-    margin-top: 0.85rem;
-    font-size: 0.95rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
   }
   .photo-links a { text-decoration: none; }
   .photo-links a:hover { text-decoration: underline; }
-
-  .bio { text-align: left; }
-  .bio p { max-width: var(--measure); margin: 0 0 1.35rem; }
+  /* line-height:1 stops the glyph sitting low against the text baseline. */
+  .photo-links .dot {
+    color: var(--california-gold);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
 
   /* ---------- RESUME BUTTON + LINKS ---------- */
   /* Two columns: a fixed 280px photo, then 1fr meaning "all remaining
@@ -311,6 +316,7 @@
           <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
           <div class="photo-links">
             <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a>
+            <span class="dot">&bull;</span>
             <a href="mailto:rob.nelson7@outlook.com">Email</a>
           </div>
         </div>

@@ -7,7 +7,35 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rob Nelson</title>
-  <meta name="description" content="Rob Nelson — U.S. Army veteran and Berkeley Haas MBA candidate.">
+  <meta name="description" content="U.S. Army officer, Berkeley Haas MBA candidate, and engineer.">
+
+  <!-- ============================================================
+       LINK PREVIEW CARDS (Open Graph)
+       These do nothing for a visitor. They are read by LinkedIn,
+       Slack, iMessage, Teams, Discord and similar when someone pastes
+       your URL, to build the preview box.
+
+       og:url and og:image MUST be absolute (full https://... paths).
+       A relative path like "assets/preview.jpg" will not work here,
+       because the scraper has no page context to resolve it against.
+
+       IF YOU CHANGE DOMAINS, update both URLs below.
+       ============================================================ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://roblnelson.com/">
+  <meta property="og:title" content="Rob Nelson — Veteran | MBA | Engineer">
+  <meta property="og:description" content="U.S. Army officer, Berkeley Haas MBA candidate, and engineer.">
+  <meta property="og:image" content="https://roblnelson.com/assets/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rob Nelson">
+
+  <!-- Twitter/X uses its own namespace. summary_large_image is the
+       wide card; without it you get a small square thumbnail. -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rob Nelson — Veteran | MBA | Engineer">
+  <meta name="twitter:description" content="U.S. Army officer, Berkeley Haas MBA candidate, and engineer.">
+  <meta name="twitter:image" content="https://roblnelson.com/assets/preview.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,6 +150,18 @@
 
   /* Prose stays left-aligned. Centered body text is hard to read —
      the eye loses the start of each line. */
+  /* Two links sharing one row under the photo. space-between pushes them
+     to opposite ends of the column; swap to flex-start to group them left. */
+  .photo-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.85rem;
+    font-size: 0.95rem;
+  }
+  .photo-links a { text-decoration: none; }
+  .photo-links a:hover { text-decoration: underline; }
+
   .bio { text-align: left; }
   .bio p { max-width: var(--measure); margin: 0 0 1.35rem; }
 
@@ -266,26 +306,27 @@
     <div class="wrap">
       <div class="hero-grid">
 
-        <!-- Column 1: the photo. -->
-        <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
+        <!-- Column 1: photo, with the two contact links directly beneath it. -->
+        <div>
+          <img class="headshot" src="assets/headshot.jpg" alt="Rob Nelson">
+          <div class="photo-links">
+            <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a>
+            <a href="mailto:rob.nelson7@outlook.com">Email</a>
+          </div>
+        </div>
 
-        <!-- Column 2: headline, paragraphs, contact links. -->
+        <!-- Column 2: headline and paragraphs. -->
         <div>
           <h1>
             <span class="part">Veteran</span><span class="pipe">|</span><span class="part">MBA</span><span class="pipe">|</span><span class="part">Engineer</span>
           </h1>
 
           <div class="bio">
-        <p>I am a veteran U.S. Army Engineer officer, a Texas A&M alumnus, and a UC Berkeley Haas Evening &amp; Weekend MBA candidate. Across eight years in uniform I built teams and systems from the ground up at progressive levels of size and difficulty, and I was often selected for the tough assignments that called for a strong leader. That's the work I love and what I'm best at: building the systems and culture that a team needs to achieve its goals, then leaving behind successful organizations that keeps running without me.</p>
+            <p>I am a veteran U.S. Army Engineer officer, a Texas A&amp;M alumnus, and a UC Berkeley Haas Evening &amp; Weekend MBA candidate. Across eight years in uniform I built teams and systems from the ground up at progressive levels of size and difficulty, and I was often selected for the tough assignments that called for a strong leader. That&rsquo;s the work I love and what I&rsquo;m best at: building the systems and culture that a team needs to achieve its goals, then leaving behind successful organizations that keep running without me.</p>
 
-        <p>I'm looking for leadership roles that challenge me, and the place I most want to be is where technology and energy meet. I think we're in a technological shift on the scale of the industrial revolution or the arrival of the personal computer, and I'd rather build inside it than watch it happen. As the world economy grows, we face problems that are physical, capital-intensive, and operationally hard — which is what I've spent my career on and why I want to apply my skills to the emerging energy industry. I'm prioritizing remote work and open to relocating to most major metros, with San Diego, the Bay Area, Dallas, and Seattle at the top of the list.</p>
+            <p>I&rsquo;m looking for leadership roles that challenge me, and the place I most want to be is where technology and energy meet. I think we&rsquo;re in a technological shift on the scale of the industrial revolution or the arrival of the personal computer, and I&rsquo;d rather build inside it than watch it happen. As the world economy grows, we face problems that are physical, capital-intensive, and operationally hard &mdash; which is what I&rsquo;ve spent my career on and why I want to apply my skills to the emerging energy industry. I&rsquo;m prioritizing remote work and open to relocating to most major metros, with San Diego, the Bay Area, Dallas, and Seattle at the top of the list.</p>
 
-        <p>Outside of work I'm a husband and father of two, which is the part of my life that drives the rest of it. I'm teaching myself Spanish and Japanese with mixed results, I like to write short science fiction stories that nobody asks to read, and I'm the sort of person who follows climate and tech policy for fun. I am reading through every president's biography in order because I love learning about how other leaders analyze problems, how they communicate, and how they make tough calls. I've also been building an AI app on the side, a personal stylist for men, which I mention partly because it's going well and partly because I like having something to tinker with. And I will talk about sports — especially NFL football — for as long as you let me.</p>
-          </div>
-
-          <div class="actions">
-            <a href="https://www.linkedin.com/in/rob-nelson-haas">LinkedIn</a>
-            <a href="mailto:rob.nelson7@outlook.com">rob.nelson7@outlook.com</a>
+            <p>Outside of work I&rsquo;m a husband and father of two, which is the part of my life that drives the rest of it. I&rsquo;m teaching myself Spanish and Japanese with mixed results, I like to write short science fiction stories that nobody asks to read, and I&rsquo;m the sort of person who follows climate and tech policy for fun. I am reading through every president&rsquo;s biography in order because I love learning about how other leaders analyze problems, how they communicate, and how they make tough calls. I&rsquo;ve also been building an AI app on the side, a personal stylist for men, which I mention partly because it&rsquo;s going well and partly because I like having something to tinker with. And I will talk about sports &mdash; especially NFL football &mdash; for as long as you let me.</p>
           </div>
         </div>
 
@@ -379,7 +420,7 @@
 
     <section id="education">
       <div class="wrap">
-        <h2>Education</h2>
+        <h2>Education &amp; Certifications</h2>
         <ul class="edu">
           <li>
             <span class="role">MBA, Evening &amp; Weekend</span>
@@ -397,14 +438,14 @@
             <span class="dates">2016</span>
           </li>
           <li>
-            <span class="role">Project Management Professional (PMP)</span>
-            <span class="org">Project Management Institute</span>
-            <span class="dates">2023</span>
-          </li>
-          <li>
             <span class="role">LEED Green Associate</span>
             <span class="org">U.S. Green Building Council</span>
             <span class="dates">2026</span>
+          </li>
+          <li>
+            <span class="role">Project Management Professional (PMP)</span>
+            <span class="org">Project Management Institute</span>
+            <span class="dates">2023</span>
           </li>
         </ul>
       </div>
